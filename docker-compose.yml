@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  hugowatch:
+    #container_name: hugowatch
+    #network_mode: host
+    #restart: unless-stopped
+    image: 127.0.0.1:5000/hugowatch:latest
+    volumes:
+      - /mnt/Sites/toPi/:/site_basedir/
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        max_replicas_per_node: 1
+        constraints: [node.labels.captainslowpoke != true]
